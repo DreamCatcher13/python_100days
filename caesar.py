@@ -15,7 +15,7 @@ def caesar(message, shift, action):
         shift *= -1
     #  
     for l in list(message):
-        if l == ' ':
+        if l not in alphabet:
             result += l
             continue
         indx = alphabet.index(l)

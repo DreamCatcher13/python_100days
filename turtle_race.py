@@ -20,6 +20,9 @@ judge.pendown()
 judge.goto(x=250, y=-270)
 """ """
 
+
+# TODO make infinity race
+
 for c in colors:
     new_turtle = Turtle(shape="turtle")
     new_turtle.color(c)

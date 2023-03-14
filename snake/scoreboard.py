@@ -11,7 +11,7 @@ class ScoreBoard(Turtle):
         self.penup()
         self.color("white")
         self.score = 0   
-        self.high_score = 0     
+        self.high_score = self.get_high_score()    
         self.goto(0, 280)
         self.update_scoreboard()
 
@@ -25,6 +25,18 @@ class ScoreBoard(Turtle):
 
     def reset(self):
         if self.score > self.high_score:
+            with open("data.txt", "w") as file:
+                file.write(f"{self.score}")
             self.high_score = self.score
         self.score = 0
         self.update_scoreboard()
+
+    def get_high_score(self):
+        try:
+            with open("data.txt", "r") as file:
+                return int(file.read())
+        except FileNotFoundError:
+            with open("data.txt", "w") as file:
+                file.write("0")
+                return 0
+

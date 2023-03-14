@@ -39,12 +39,14 @@ while game_is_on:
     if ball.xcor() > 380:
         ball.reset()
         board.l_point()
+        if board.l_score == 10:
+            game_is_on = False
 
     if ball.xcor() < -380:
         ball.reset()
         board.r_point()
-
-
+        if board.r_score == 10:
+            game_is_on = False
 
 
 

@@ -13,6 +13,8 @@ user_score = 0
 while user_score != 50:
     answer = screen.textinput(title=f"{user_score}/50 states",
                           prompt="What's another state name?").title()
+    if answer == "Exit":
+        break
     if answer in states_list:
         user_score += 1
         new_t = turtle.Turtle()

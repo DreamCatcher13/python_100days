@@ -1,4 +1,14 @@
 from tkinter import *
+import os, sys
+
+### for pyinstaller
+def resource_path(relative_path):
+    try:   
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
@@ -70,7 +80,7 @@ window.config(padx=100, pady=50, bg=YELLOW)
 
 # we will place an image on canvas, so it should be ~ the same size
 canvas = Canvas(width=205, height=224, bg=YELLOW, highlightthickness=0)
-tomato = PhotoImage(file="tomato.png") #to transform png image to smth canvas unredstands
+tomato = PhotoImage(file=resource_path("tomato.png")) #to transform png image to smth canvas unredstands
 canvas.create_image(102, 112, image=tomato)
 timet_text = canvas.create_text(102, 130, text="00:00", fill="white", font=(FONT_NAME, 27, "bold"))
 canvas.grid(column=2, row=2)

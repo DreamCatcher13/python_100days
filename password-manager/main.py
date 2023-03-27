@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
 import string, random, pyperclip
+import json
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate_password():
     letters = string.ascii_letters
@@ -18,21 +20,31 @@ def generate_password():
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save_pass():
-    s = site.get()
-    em = user_email.get()
-    p = password_out.get()
+    website = site.get()
+    email = user_email.get()
+    pswd = password_out.get()
+    new_data = {
+        website: {
+            "email": email,
+            "password": pswd,
+        }
+    }
 
-    if len(s) == 0 or len(p) == 0 or len(em) == 0:
+    if len(website) == 0 or len(pswd) == 0 or len(email) == 0:
         messagebox.showerror(title="Manager error", message="Don't leave any of the fields empty!")
     else:
-        is_ok = messagebox.askokcancel(title=f"{s}",
-                                message=f"You are going to save this: \nEmail: {em}, \nPassword: {p} \nIs this ok?")
-        if is_ok:
-            with open("pwd.txt", "a") as file:
-                file.write(f"{s} | {em} | {p}\n") #yes, it is not encrypted :)
-            site.delete(0, END) # clear all field
-            password_out.delete(0, END)
-            site.focus()
+        with open("pwd.json", "r") as file:
+            # reading old data
+            data = json.load(file)
+            # updating old with new
+            data.update(new_data)
+        with open("pwd.json", "w") as file:
+            # overwriting the file
+            json.dump(data, file, indent=4)
+        
+        site.delete(0, END) # clear all field
+        password_out.delete(0, END)
+        site.focus()
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()

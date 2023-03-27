@@ -55,12 +55,12 @@ def count_down(count):
     min = int(count / 60)
     sec = int(count % 60)
 
-    if sec < 10:
-        sec = f"0{sec}"
-    if min < 10:
-        min = f"0{min}"
+    # if sec < 10:
+    #     sec = f"0{sec}"
+    # if min < 10:
+    #     min = f"0{min}"
 
-    canvas.itemconfig(timet_text, text=f"{min}:{sec}") #config canvas element
+    canvas.itemconfig(timet_text, text=f"{min:02d}:{sec:02d}") #config canvas element
     if count > 0:
         global my_timer
         #recursion, after 1000 ms = 1 s, call count_down func with arg

@@ -18,6 +18,22 @@ def generate_password():
     password_out.insert(0, pwd)
     pyperclip.copy(pwd)
 
+# ---------------------------- SEARCH FOR WEBSITE ------------------------------- #
+def search_site():
+    website = site.get()
+    try:
+        with open("pwd.json", "r") as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="Error", message="File with passwords doesn't exist")
+    else:
+        if website not in data.keys():
+            messagebox.showinfo(title="Error", message=f"No password for {website}")  
+        else:
+            email = data[website]["email"]
+            pwd = data[website]["password"]
+            messagebox.showinfo(title="Credentials", message=f"Email: {email} \nPassword: {pwd}")
+
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save_pass():
     website = site.get()
@@ -33,18 +49,23 @@ def save_pass():
     if len(website) == 0 or len(pswd) == 0 or len(email) == 0:
         messagebox.showerror(title="Manager error", message="Don't leave any of the fields empty!")
     else:
-        with open("pwd.json", "r") as file:
-            # reading old data
-            data = json.load(file)
-            # updating old with new
+        try: 
+            with open("pwd.json", "r") as file:
+                # reading old data
+                data = json.load(file)
+        except FileNotFoundError:
+            with open("pwd.json", "w") as file:
+                json.dump(new_data, file, indent=4)
+        else:
+             # updating old with new
             data.update(new_data)
-        with open("pwd.json", "w") as file:
-            # overwriting the file
-            json.dump(data, file, indent=4)
-        
-        site.delete(0, END) # clear all field
-        password_out.delete(0, END)
-        site.focus()
+            with open("pwd.json", "w") as file:
+                # overwriting the file
+                json.dump(data, file, indent=4)
+        finally:        
+            site.delete(0, END) # clear all field
+            password_out.delete(0, END)
+            site.focus()
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -73,9 +94,11 @@ user_email.grid(column=2, row=3)
 user_email.insert(0, "mybox@mail.com") # 0 and END are indecies, there you put your string
 password_out.grid(column=2, row=4)
 
-generate = Button(text="Generate password", command=generate_password)
+generate = Button(text="Generate password", width=20, command=generate_password)
 add_pass = Button(text="Add", width=35, command=save_pass)
+search = Button(text="Search", width=20, command=search_site)
 generate.grid(column=3, row=4)
 add_pass.grid(column=2, row=5)
+search.grid(column=3, row=2)
 
 window.mainloop()

@@ -131,3 +131,5 @@ dmypy.json
 # directories
 Mail_Project/
 data/
+password-manager/pwd*
+birthday-wisher/birthdays.csv

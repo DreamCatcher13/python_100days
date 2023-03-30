@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # directories
-Mail_Project/
+ignored/
 data/
 password-manager/pwd*
 birthday-wisher/birthdays.csv

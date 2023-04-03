@@ -5,7 +5,13 @@ from quiz_brain import QuizBrain
 question_bank = []
 #for i in range(len(question_data)):
 for q in question_data:
-    question_bank.append(Question(q['text'], q['answer'] ))
+    if "&quot;" in q['question']:
+        q['question'] = q['question'].replace("&quot;", "\"")
+    if "&#039;" in q['question']:
+        q['question'] = q['question'].replace("&#039;", "'")
+    question_bank.append(Question(q['question'], q['correct_answer'] ))
+
+#print(question_data)
 
 quiz = QuizBrain(question_bank)
 

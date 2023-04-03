@@ -1,7 +1,9 @@
 import requests
 
 responce = requests.get(url="https://opentdb.com/api.php?amount=10&type=boolean")
-print(responce.json()['results'])
+question_data = responce.json()['results']
+
+""" 
 question_data = [
     {"text": "A slug's blood is green.", "answer": "True"},
     {"text": "The loudest animal is the African Elephant.", "answer": "False"},
@@ -16,3 +18,4 @@ question_data = [
     {"text": "No piece of square dry paper can be folded in half more than 7 times.", "answer": "False"},
     {"text": "A few ounces of chocolate can to kill a small dog.", "answer": "True"}
 ]
+"""

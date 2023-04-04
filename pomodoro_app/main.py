@@ -1,5 +1,6 @@
 from tkinter import *
 import os, sys
+from playsound import playsound
 
 ### for pyinstaller
 def resource_path(relative_path):
@@ -41,13 +42,16 @@ def start_timer():
     long_break_sec =  LONG_BREAK_MIN * 60
 
     if repetitions % 8 == 0:
-        timer.config(text="Long break", fg=RED)
+        timer.config(text="Long break", fg=RED)        
+        playsound(resource_path("notification.mp3"))
         count_down(long_break_sec)
     elif repetitions % 2 == 0:
         timer.config(text="Short break", fg=PINK)
+        playsound(resource_path("notification.mp3"))
         count_down(short_break_sec)
     else: 
-        timer.config(text="Work", fg=GREEN)   
+        timer.config(text="Work", fg=GREEN)  
+        playsound(resource_path("notification.mp3")) 
         count_down(work_sec)
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 

@@ -53,4 +53,21 @@ graph_params = {
 endpoint = f"{pixela}/{username}/graphs/{graph_id}"
 
 responce = requests.post(url=endpoint, json=graph_params, headers=headers)
-print(responce.text)
+print(responce.text) 
+
+""" update a pixel 
+headers = {
+    "X-USER-TOKEN": token
+}
+
+date = datetime.now().strftime("%Y%m%d")
+
+graph_params = {
+    "quantity": "110"
+}
+
+endpoint = f"{pixela}/{username}/graphs/{graph_id}/{date}"
+# PUT method !
+responce = requests.put(url=endpoint, json=graph_params, headers=headers)
+print(responce.text) 
+"""

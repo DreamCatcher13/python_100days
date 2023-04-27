@@ -133,3 +133,4 @@ ignored/
 data/
 password-manager/pwd*
 birthday-wisher/birthdays.csv
+flask-projects/name-card-site/static/images/bg1.png

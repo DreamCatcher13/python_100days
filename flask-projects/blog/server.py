@@ -20,6 +20,7 @@ def guess(name):
 
 @app.route("/blog")
 def blog():
+    # can't access npoint
     blog_url = 'https://api.npoint.io/5abcca6f4e39b4955965'
     all_posts = requests.get(url=blog_url)
     return render_template('blog.html', posts=all_posts)

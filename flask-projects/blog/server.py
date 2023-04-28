@@ -4,26 +4,24 @@ import requests
 
 app = Flask(__name__)
 
+blog_url = 'https://www.jsonkeeper.com/b/HTK6'
+all_posts = requests.get(url=blog_url).json()
+
 @app.route('/')
 def home():
     y = datetime.now().strftime("%Y")
     # passing value to template
-    return render_template('index.html', year=y) 
+    return render_template('index.html', year=y, posts=all_posts) 
 
-@app.route("/guess/<name>")
-def guess(name):
-    agify = requests.get(f"https://api.agify.io?name={name}")
-    genderize = requests.get(f"https://api.genderize.io?name={name}")
-    age = str(agify.json()['age'])
-    gender = genderize.json()['gender']
-    return render_template('api.html', n=name, a=age, g=gender)
-
-@app.route("/blog")
-def blog():
-    # can't access npoint
-    blog_url = 'https://api.npoint.io/5abcca6f4e39b4955965'
-    all_posts = requests.get(url=blog_url)
-    return render_template('blog.html', posts=all_posts)
+@app.route('/post/<int:id>')
+def post(id):
+    for p in all_posts:
+        if p['id'] == id:
+            selected = p
+            return render_template("post.html", post=selected)
+        
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+#https://jsonkeeper.com/b/HTK6

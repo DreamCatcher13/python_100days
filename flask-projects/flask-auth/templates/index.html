@@ -2,10 +2,14 @@
 {% block content %}
 
 <div class="box">
-	<h1>Flask Authentication</h1>
+  {% if not current_user.is_authenticated %}
+	  <h1>Flask Authentication</h1>
 
-  <a href="{{ url_for('login') }}" class="btn btn-primary btn-block btn-large">Login</a>
-  <a href="{{ url_for('register') }}" class="btn btn-secondary btn-block btn-large">Register</a>
+    <a href="{{ url_for('login') }}" class="btn btn-primary btn-block btn-large">Login</a>
+    <a href="{{ url_for('register') }}" class="btn btn-secondary btn-block btn-large">Register</a>
+  {% else %}
+    <h1>Hello, {{ current_user.name }}</h1>
+  {% endif %}
 
 </div>
 

@@ -17,7 +17,7 @@ morse_dict = { 'A':'.-', 'B':'-...',
 
 
 print("##  WELCOME to Python Morse code converter  ##")
-print("*"*45 + "\n")
+print("*"*46 + "\n")
 
 def converter(text):
     encrypted = ""

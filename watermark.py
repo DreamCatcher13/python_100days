@@ -9,6 +9,7 @@ IMAGE = ""
 BG = "#c5ccfa"
 
 def select_img():
+    """function to select an image"""
     global IMAGE
     img_path.delete(0, END)
     filetypes = (('All files', '*.*'),)
@@ -17,6 +18,7 @@ def select_img():
     IMAGE = img_file
 
 def put_watermark():
+    """function to put a watermark text on selected image"""
     global IMAGE
     if IMAGE:
         name, ext = IMAGE.split('/')[-1].split('.')
